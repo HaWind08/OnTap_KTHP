@@ -1,0 +1,120 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void Nhap(float *a, int n)
+{
+	cout << "Nhap mang:" << endl;
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(float *a, int n)
+{
+	cout << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+	ofstream f("nABC2018.txt", ios::out);
+	f << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();
+	
+}
+
+void SapXep(float *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		for(int j = i + 1;j < n;j++)
+		{
+			if(*(a + i) < *(a + j)) swap(*(a + i),*(a + j));
+		}
+	}
+		
+	ofstream f("nABC2018.txt", ios::app);
+	f << "Mang sau khi sap xep la: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();
+		
+}
+
+void Find(float *a, int n)
+{
+	float min = *(a + 0);
+	bool cosoduong;
+	
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) > 0 && *(a + i) < min) 
+		{
+			min = *(a + i);
+			cosoduong = true;
+		}
+	}
+	
+	if(cosoduong)
+	{
+		cout << "Phan tu duong nho nhat la: " << min << endl;
+	}
+	else cout << "Mang khong co phan tu duong nao." << endl;
+}
+
+bool Check(float *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) <= 0) return false;
+		if(*(a + i) + *(a + i + 1) < 5) return false;
+	}
+	return true;
+}
+
+void KiemTra(float *a, int n)
+{
+	if(Check(a,n))
+	{
+		cout << "Mang hop le." << endl;
+	}
+	else cout << "Mang khong hop le." << endl;
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	
+	float *a = new float[n];
+	
+	Nhap(a,n);
+	Xuat(a,n);
+	
+	SapXep(a,n);
+	
+	Find(a,n);
+	
+	KiemTra(a,n);
+	
+	delete[] a;
+	return 0;
+	
+}
+
+
+
+
