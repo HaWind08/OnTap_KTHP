@@ -1,0 +1,142 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void Nhap(int *a, int n)
+{	
+	cout << "Nhap mang: ";
+	for(int i = 0;i < n;i++)
+	{
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	cout << "Mang vua nhap la: ";
+	for(int i = 0;i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+	ofstream f("nABC2014.txt",ios::out);
+	f << "Mang vua nhap la: ";
+	for(int i = 0;i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();
+	
+}
+
+void SapXep(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		for(int j = i + 1; j < n;j++)
+		{
+			if(*(a + i) > *(a + j)) swap(*(a + i), *(a + j));
+		}
+	}
+	
+	ofstream f("nABC2014.txt",ios::app);
+	f << "Mang sau khi sap xep: ";
+	for(int i = 0;i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();
+	
+}
+
+void Xoa(int *a, int &n, int k)
+{
+	for(int i = k;i < n;i++)
+	{
+		*(a + i) = *(a + i + 1);
+	}
+	n--;
+		
+}
+
+void Xoa_pt(int *a, int &n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 == 0)
+		{
+			Xoa(a,n,i);
+			i--;
+		}
+	}
+	
+	cout << "Mang sau khi xoa la: ";
+	for(int i = 0;i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+}
+
+void SaoChep(int *a, int &n)
+{
+	int x = 0, y = 0;
+	int *b = new int[y]; // mang so am
+	int *c = new int[n + y]; // mang am + ban dau
+	
+	for(int i = 0;i < n;i++)
+	{
+		if(*(a + i) < 0)
+		{
+			*(b + x) = *(a + i);
+			x++; // theo doi vi tri cua x
+			y++; // dem so am
+		}
+	}
+	
+	for(int i = 0;i < y;i++)
+	{
+		*(c + i) = *(b + i);
+	}
+	
+	for(int i = 0; i < n;i++)
+	{
+		*(c + i + y) = *(a + i);
+	}
+	
+	cout << "Mang sau khi sao chep la: ";
+	for(int i = 0;i < n + y;i++)
+	{
+		cout << *(c + i) << " ";
+	}
+	cout << endl;
+	
+	delete[] b;
+	delete[] c;
+	
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	int *a = new int[n];
+	
+	Nhap(a,n);
+	
+	Xuat(a,n);
+	
+	SapXep(a,n);
+	
+	Xoa_pt(a,n);
+	
+	SaoChep(a,n);
+	
+	delete[] a;
+	return 0;
+}
