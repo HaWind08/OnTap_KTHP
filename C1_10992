@@ -1,0 +1,64 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+void Nhap(int &n, float &x)
+{
+	cout << "Nhap n: "; cin >> n;
+	cout << "Nhap x: "; cin >> x;
+}
+
+int Tang(int &n)
+{
+	n++;
+}
+
+float TinhS(int n, float x)
+{
+	float S = 0;
+	if(n > 2)
+	{
+		for(int i = 1;i <= n;i++)
+		{
+			S += pow(x+1,i);
+		}
+		S += sqrt(2019);
+	}
+	else fabs(n*x);
+	
+	return S;
+}
+
+float TinhP(int n, float x)
+{
+	float P = 0;
+	for(int i = 1; i <= n;i++)
+	{
+		P += 3*i;
+	}
+	P += 2020*exp(fabs(x));
+	
+	return P;
+}
+
+int main()
+{
+	int n;
+	float x;
+	Nhap(n,x);
+	
+	Tang(n);
+	Tang(n);
+	Tang(n);
+	
+	float kq = (float)TinhS(n,x)/TinhP(n,x);
+	
+	cout << "Gia tri cua bieu thuc S/P la: " << kq << endl;
+	
+	return 0;
+}
+
+
+
+
