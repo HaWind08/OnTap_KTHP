@@ -1,0 +1,55 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+void Nhap(float &x, float &y)
+{
+	do
+	{
+		cout << "Nhap x: "; cin >> x;
+		cout << "Nhap y: "; cin >> y;
+	} while(x >= y);
+}
+
+float TinhP(int x, int y)
+{
+	float P = 0;
+	if(x < y)
+	{
+		P = exp(fabs(x)) + fabs(y) + sqrt(y - x);
+	}
+	else P = 1;
+	
+	return P;
+}
+
+float TinhF(int x, int n)
+{
+	float F = 0;
+	for(int i = 2; i <= n;i++)
+	{
+		F += (float)pow(x,i)/pow(i,i);
+	}
+	F += 2020*x;
+	
+	return F;
+}
+
+int main()
+{
+	float x,y;
+	int m;
+	
+	Nhap(x,y);
+	cout << "Nhap m: "; cin >> m;
+	
+	cout << "Ket qua cua bieu thuc P(x,y) la: " << TinhP(x,y) << endl;
+	cout << "Ket qua cua bieu thuc F(x+y,m) la: " << TinhF(x+y,m) << endl;
+	
+	return 0;
+} 
+
+
+
+
