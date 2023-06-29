@@ -1,0 +1,62 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+void Nhap(int &n)
+{
+	cin >> n;
+}
+
+int TinhGT(int n)
+{
+	if(n == 1) return 1;
+	else return n*TinhGT(n - 1);
+}
+
+float TinhP(int n, float x)
+{
+	float P = 0;
+	float Thuong = (float)1/TinhGT(n);
+	
+	for(int i = 1;i <= n+1;i++)
+	{
+		P += pow(x,i);
+	}
+	P = (P + 2020*exp(fabs(x)))*Thuong;
+	
+	return P;
+}
+
+float TinhK(int n, int m, float x)
+{
+	float Tu = TinhP(n,x) + TinhP(m,x);
+	float Mau = TinhP(n+m,x);
+	
+	float K = (float)Tu/Mau;
+	
+	return K;
+}
+
+int main()
+{
+	int n,m;
+	float x;
+	
+	cout << "Nhap n: ";
+	Nhap(n);
+	
+	cout << "Nhap m: ";
+	Nhap(m);
+
+	cout << "Nhap x: "; cin >> x;
+	
+	cout << "Ket qua cua bieu thuc Q: " << TinhK(n,m,x)+TinhP(n,x)+TinhP(m,x);
+	
+	return 0;
+}
+
+
+
+
+
