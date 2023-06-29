@@ -1,0 +1,64 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+void Nhap(int &n, int &m)
+{
+	cout << "Nhap n: "; cin >> n;
+	cout << "Nhap m: "; cin >> m;
+	if(n > m) swap(n,m);
+	
+}
+
+int Tong(int n, int m)
+{
+	int sum = 0;
+	if(n <= m)
+	{
+		for(int i = n;i <= m;i++)
+		{
+			if(i % 3 == 0 && i % 5 == 0)
+			{
+				sum += i;
+			}
+		}
+	}
+	return sum;
+}
+
+float TinhF(int n, float x)
+{
+	float F = 0;
+	if(n > 0)
+	{
+		for(int i = 1; i <= n;i++)
+		{
+			F += (float)x/(2*n-i);
+		}
+		F += 2020*fabs(n*x);
+	}
+	else F = 1;
+	
+	return F;
+}
+
+int main()
+{
+	int n,m;
+	float x;
+	
+	Nhap(n,m);
+	cout << "Nhap x: ";cin >> x;
+	
+	cout << "Tong trong doan [n,m]: " << Tong(n,m) << endl;
+	cout << "Tong trong doan [1,n]: " << Tong(1,n) << endl;
+	
+	cout << "Ket qua cua bieu thuc T: " << TinhF(m,x) - TinhF(n,x) << endl;
+	
+	return 0;
+}
+
+
+
+
