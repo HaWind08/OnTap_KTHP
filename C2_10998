@@ -1,0 +1,145 @@
+#include<iostream>
+#include<fstream>
+#include<math.h>
+
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	cout << "Nhap mang: " << endl;
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	cout << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+	ofstream f("nABC2006.txt", ios::out);
+	f << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;	
+	f.close();
+	
+}
+
+void SapXep(int *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		for(int j = i+1; j < n;j++)
+		{
+			if(*(a + i) > *(a + j)) swap(*(a + i),*(a + j));
+		}
+	}
+	
+	ofstream f("nABC2006.txt", ios::app);
+	f << "Mang sau khi sap xep: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;	
+	f.close();	
+	
+}
+
+void LietKe(int *a, int n)
+{
+	int x;
+	cout << "Nhap x: "; cin >> x;
+	
+	int d;
+	int *b = new int[d];
+	
+	for(int i = 0;i < n;i++)
+	{
+		if(abs(*(a + i)) < x)
+		{
+			*(b + d) = *(a + i);
+			d++; // cac so < hon x 
+		}
+	}
+	
+	int sum = 0;
+	cout << "Cac phan tu co gttd nho hon x: ";
+	for(int i = 0; i < d;i++)
+	{
+		cout << *(b + i) << " ";
+		sum += *(b + i);
+	}
+	cout << endl;
+	
+	cout << "Tong cua cac phan tu co gttd nho hon x: " << sum << endl;
+	
+	delete[] b;
+}
+
+void Xoa(int *a, int &n, int k)
+{
+	for(int i = k;i < n;i++)
+	{
+		*(a + i) = *(a + i + 1);
+	}
+	n--;
+}
+
+void Xoa_pt(int *a, int &n)
+{
+	int max = *(a + 0);
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) > max) max = *(a + i);
+	}
+	
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) == max)
+		{
+			Xoa(a,n,i);
+			i--;
+		}
+	}
+	
+	cout << "Mang sau khi xoa la: ";
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	
+	int *a = new int[n];
+	Nhap(a,n);
+	Xuat(a,n);
+	
+	SapXep(a,n);
+	
+	LietKe(a,n);
+	
+	Xoa_pt(a,n);
+	
+	delete[] a;
+	return 0;
+}
+
+
+
+
