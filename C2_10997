@@ -1,0 +1,141 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	cout << "Nhap mang: " << endl;
+	for(int i = 0;i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	cout << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+	ofstream f("nABC2007.txt", ios::out);
+	f << "Mang vua nhap la: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();
+	
+}
+
+void SapXep(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		for(int j = i+1; j < n;j++)
+		{
+			if(*(a + i) > *(a + j)) swap(*(a + i), *(a + j));
+		}
+	}
+	
+	ofstream f("nABC2007.txt", ios::app);
+	f << "Mang sau khi sap xep la: ";
+	for(int i = 0; i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	f.close();	
+	
+}
+
+void Tach(int *a, int n)
+{
+	int x = 0, y = 0;
+	
+	int *b = new int[x]; // mang so le
+	int *c = new int[y]; // mang so chan
+	
+	for(int i = 0;i < n;i++)
+	{
+		if(*(a + i) % 2 != 0)
+		{
+			*(b + x) = *(a + i);
+			x++;
+		}
+	}
+	
+	for(int i = 0;i < n;i++)
+	{
+		if(*(a + i) % 2 == 0)
+		{
+			*(c + y) = *(a + i);
+			y++;
+		}
+	}
+
+	cout << "Mang le: ";
+	for(int i = 0; i < x;i++)
+	{
+		cout << *(b + i) << " ";
+	}
+	cout << endl;	
+	
+	cout << "Mang chan: ";
+	for(int i = 0; i < y;i++)
+	{
+		cout << *(c + i) << " ";
+	}
+	cout << endl;
+	
+	delete[] b;
+	delete[] c;
+}
+
+bool Check(int *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		if(*(a + i) % 2 != 0) return false;
+		if(*(a + i) == *(a + i + 1) && *(a + i + 1) == *(a + i + 2)) return false;
+	}
+	return true;
+}
+
+void KiemTra(int *a, int n)
+{
+	if(Check(a,n))
+	{
+		cout << "Mang A hop le." <<endl;
+	}
+	else cout << "Mang A khong hop le." << endl;
+	
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	
+	int *a = new int[n];
+	Nhap(a,n);
+	Xuat(a,n);
+	
+	SapXep(a,n);
+	
+	Tach(a,n);
+	
+	KiemTra(a,n);
+	
+	delete[] a;
+	return 0;
+}
+
+
+
+
