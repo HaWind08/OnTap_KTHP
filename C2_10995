@@ -56,23 +56,34 @@ void SapXep(float *a, int n)
 
 void Find(float *a, int n)
 {
-	float min = *(a + 0);
+	float min;
 	bool cosoduong;
 	
 	for(int i = 0; i < n;i++)
 	{
-		if(*(a + i) > 0 && *(a + i) < min) 
+		if(*(a + i) > 0)
+		{
+			min = *(a + i); // tim phan tu duong dau tien
+			break;
+		}
+	}
+	
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) > 0 || *(a + i) > 0 && *(a + i) < min) 
 		{
 			min = *(a + i);
 			cosoduong = true;
 		}
 	}
 	
+	
 	if(cosoduong)
 	{
 		cout << "Phan tu duong nho nhat la: " << min << endl;
 	}
 	else cout << "Mang khong co phan tu duong nao." << endl;
+	
 }
 
 bool Check(float *a, int n)
