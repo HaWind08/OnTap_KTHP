@@ -1,0 +1,148 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void Nhap(float *a, int n)
+{
+	cout << "Nhap mang: " << endl;
+	for(int i = 0;i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(float *a, int n)
+{
+	cout << "Mang vua nhap la: ";
+	for(int i = 0;i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+	
+	ofstream f("nABC2017.txt",ios::out);
+	f << "Mang vua nhap la: ";
+	for(int i = 0;i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;	
+	f.close();
+	
+}
+
+void SapXep(float *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		for(int j = i+1; j < n;j++)
+		{
+			if(*(a + i) < *(a + j)) swap(*(a + i),*(a + j));
+		}
+	}
+	
+	ofstream f("nABC2017.txt",ios::app);
+	f << "Mang sau khi sap xep: ";
+	for(int i = 0;i < n;i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;	
+	f.close();
+	
+}
+
+void Tim(float *a, int n)
+{
+	int min =*(a + 0);
+	int count = 0;
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) < min)
+		{
+			min = *(a + i);
+		}
+	}
+	
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) == min) count++;
+	}		
+	
+	cout << "So nho nhat trong mang: " << min << endl;
+	cout << "So luong so do trong mang: " << count << endl;
+}
+
+void Chen(float *a, int &n, int x,int k)
+{
+	for(int i = n; i >= k;i--)
+	{
+		*(a + i) = *(a + i - 1);
+	}
+	*(a + k) = x;
+	n++;
+}
+
+void Chen_pt(float *a, int &n)
+{
+	int x;
+	cout << "Nhap x: "; cin >> x;
+	
+	int Big_x; // ptu lon hon x dau tien
+//	for(int i = 0; i < n;i++)
+//	{
+//		if(*(a + i) > x)
+//		{
+//			Big_x = *(a + i);
+//			break;
+//		}
+//	}
+	
+	for(int i = 0;i < n;i++)
+	{
+		if(*(a + i) > x)
+		{
+			Chen(a,n,x,i+1);
+			Big_x = *(a + i);
+			break;
+		}
+	}
+	
+	if(Big_x > x)
+	{
+		cout << "Mang sau khi chen: ";
+		for(int i = 0;i < n;i++)
+		{
+			cout << *(a + i) << " ";
+		}
+		cout << endl;
+	}
+	else cout << "Khong co phan tu nao lon hon x." << endl;
+	
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	
+	float *a = new float[n];
+	Nhap(a,n);
+	Xuat(a,n);
+	
+	SapXep(a,n);
+	
+	Tim(a,n);
+	
+	Chen_pt(a,n);
+	
+	delete[] a;
+	return 0;
+}
+
+
+
+
+ 
